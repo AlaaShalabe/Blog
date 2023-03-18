@@ -38,18 +38,48 @@
             This text is within a <strong>block</strong>.
         </div>
         <div class="block">
-            This text is within a <strong>third block</strong>. This block has no margin at the bottom.
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+            <div class="columns is-multiline">
+                @foreach ($posts as $post)
+                    <div class="column is-4">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-4by3">
+                                    <img src="{{ Storage::exists($post->imge) ? Storage::url($post->imge) : $post->imge }}"
+                                        alt="Placeholder image">
+
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="media">
+                                    {{-- <div class="media-left">
+                                        <figure class="image is-48x48">
+                                            <img src="{{ Storage::exists($post->auther_imge) ? Storage::url($post->auther_imge) : $post->auther_imge }}"
+                                                alt="Placeholder image">
+                                        </figure>
+                                    </div> --}}
+                                    <div class="media-content">
+                                        <p class="title is-4"> <a
+                                                href="{{ route('post.show', $post) }}">{{ $post->titel }}</a> </p>
+                                        <p class="subtitle is-6"> {{ $post->category }}</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    {{ $post->content }}
+                                    <br>
+                                    <time datetime="2016-1-1">{{ $post['created_at'] }}</time>
+                                    <br>
+                                    @foreach ($post->tags as $tag)
+                                        <a href="{{ route('tags.show', $tag) }}" class="tag is-link">
+                                            {{ $tag->name }}</a>
+                                    @endforeach
+                                    <a href="{{ route('categories.show', $post->category) }}"
+                                        class="tag is-danger">{{ $post->category->name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
-
     </section>
 @endsection
