@@ -30,8 +30,8 @@
                                         @method('delete')
                                         <a href="{{ route('category.edit', $category) }}">
                                             <i class="fa-solid fa-pen-to-square fa-xl"></i></a>
-                                        {{-- <a href="{{ route('categorys.show', $category) }}"><i
-                                                class="fa-sharp fa-solid fa-eye fa-xl"></i></a> --}}
+                                        <a href="{{ route('category.show', $category) }}"><i
+                                                class="fa-sharp fa-solid fa-eye fa-xl"></i></a>
                                         <button class="delete " type="submit">
                                         </button>
                                     </form>

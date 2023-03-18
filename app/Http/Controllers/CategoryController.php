@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -29,9 +30,14 @@ class CategoryController extends Controller
         return redirect()->route('categories')->with('massage', 'Created Successfully');
     }
 
+    public function show(Category $category)
+    {
+        return view('category.show')->with(['category' => $category]);
+    }
+
     public function edit(Category $category)
     {
-        return View('category.edit', ['category' => $category]);
+        return View('category.edit')->with(['category' => $category]);
     }
 
     public function update(Request $request, Category $category)
