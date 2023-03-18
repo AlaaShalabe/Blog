@@ -28,14 +28,15 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        //dd($request->all());
         $request->validated();
         $post = new Post();
         $post->titel = $request->titel;
         $post->category_id = $request->category_id;
         $post->content = $request->content;
-        $post->imge = $request->file('imge')->store('public/post_imges');
+        $post->imge = $request->file('imge')->store('public/imge');
         $post->slug = $request->slug = Str::lower(str_replace(' ', '-', $request->titel));
-        $post->user_id = auth()->user();
+        $post->user_id = auth()->user()->id;
         $post->save();
         $post->tags()->attach($request->tag_id);
 
