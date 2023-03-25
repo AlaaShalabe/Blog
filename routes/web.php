@@ -18,10 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/', [PostController::class, 'index'])->name('welcome');
 Route::prefix('category')->group(function () {
     Route::get('/index', [CategoryController::class, 'index'])->name('categories');
     Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
@@ -37,7 +35,7 @@ Route::prefix('user')->group(function () {
     Route::post('/rigester', [RigesterController::class, 'rigester'])->name('rigester');
     Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/storeLogin', [LoginController::class, 'storeLogin'])->name('storeLogin');
-    Route::post('/logOut', [LoginController::class, 'lgOut'])->name('logOut');
+    Route::post('/logOut', [LoginController::class, 'logOut'])->name('logOut');
 });
 
 Route::prefix('tag')->group(function () {
@@ -51,7 +49,6 @@ Route::prefix('tag')->group(function () {
 });
 
 Route::prefix('post')->group(function () {
-    Route::get('/index', [PostController::class, 'index'])->name('posts');
     Route::get('/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/store', [PostController::class, 'store'])->name('post.store');
     Route::get('/show/{post}', [PostController::class, 'show'])->name('post.show');

@@ -20,9 +20,9 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">content</label>
+                    <label class="label">Content</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Name" name="content">
+                        <textarea class="textarea" placeholder="Name" name="content">{{ old('content') }}</textarea>
                         @error('content')
                             <div class="help is-danger">{{ $message }}</div>
                         @enderror
@@ -49,33 +49,37 @@
                 <div class="field">
                     <label class="label">Tag</label>
                     <div class="control">
-                        <div class="select">
-                            <select name="tags[]">
-                                @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">
-                                        {{ $tag->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('tags')
-                                <div class="help is-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <select name="tags[]" multiple class="select is-multiple">
+                            @foreach ($tags as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('tags')
+                            <div class="help is-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
+
                 <div class="mb-3">
                     <label class="form-label" for="inputImage">Image:</label>
-                    <input type="file" name="imge" id="inputImage"
-                        class="form-control @error('imge') is-invalid @enderror">
-
-                    @error('imge')
+                    <input type="file" name="image" id="inputImage"
+                        class="form-control @error('image') is-invalid @enderror">
+                    @error('image')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+        </div>
 
-                <button type="submit" class="btn btn-primary ">Create</button>
-            </form>
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-link">{{ __('Create') }}</button>
+            </div>
+            <div class="control">
+                <button class="button is-link is-light">{{ __('Cancel') }}</button>
+            </div>
+        </div>
+        </form>
         </div>
     </section>
 @endsection

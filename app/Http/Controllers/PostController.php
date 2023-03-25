@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -28,32 +29,38 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        //dd($request->all());
-        $request->validated();
-        $post = new Post();
-        $post->titel = $request->titel;
-        $post->category_id = $request->category_id;
-        $post->content = $request->content;
-        $post->imge = $request->file('imge')->store('public/imge');
-        $post->slug = $request->slug = Str::lower(str_replace(' ', '-', $request->titel));
-        $post->user_id = auth()->user()->id;
-        $post->save();
-        $post->tags()->attach($request->tag_id);
+        $data = $request->validated();
+        $data['slug'] = Str::lower(str_replace(' ', '-', $request->titel));
+        $data['user_id'] = auth()->user()->id;
+        $data['image'] = $request->file('image')->store('public/post_images');
+        $post = Post::create($data);
+        $post->tags()->attach($request->tags);
 
+        return redirect()->route('welcome', ['post' => $post])->with('massage', 'Created Successfully');
+    }
 
-        return redirect()->route('posts')->with('massage', 'Created Successfully');
+    public function show(Post $post)
+    {
+        return view('post.show')->with(['post' => $post]);
     }
 
     public function edit(Post $post)
     {
-        return View('post.edit', ['post' => $post]);
+        $categories = Category::all();
+        $tags = Tag::all();
+        return View('post.edit')->with(['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
-
-
-    public function destory(Category $category)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        $category->delete();
-        return redirect()->route('posts')->with('massage', 'Deleted Successfully');
+        $data = $request->validated();
+        $post->update($data);
+        return redirect()->route('post.show', $post)->with('massage', 'Updated Successfully');
+    }
+
+    public function destory(Post $post)
+    {
+        $post->delete();
+        return redirect()->route('welcome')->with('massage', 'Deleted Successfully');
     }
 }

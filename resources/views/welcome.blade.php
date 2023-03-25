@@ -34,6 +34,14 @@
                 </button>
             </div>
         </div>
+
+        <div class="block ">
+            @if (Session::get('massage'))
+                <div class="alert alert-info mr-6 ml-6" role="alert">
+                    <li>{{ Session::get('massage') }}</li>
+                </div>
+            @endif
+        </div>
         <div class="block">
             This text is within a <strong>block</strong>.
         </div>
@@ -44,35 +52,22 @@
                         <div class="card">
                             <div class="card-image">
                                 <figure class="image is-4by3">
-                                    <img src="{{ Storage::exists($post->imge) ? Storage::url($post->imge) : $post->imge }}"
-                                        alt="Placeholder image">
-
+                                    <img src="images/{{ Session::get('image') }}" alt="Placeholder image">
                                 </figure>
                             </div>
                             <div class="card-content">
-                                <div class="media">
-                                    {{-- <div class="media-left">
-                                        <figure class="image is-48x48">
-                                            <img src="{{ Storage::exists($post->auther_imge) ? Storage::url($post->auther_imge) : $post->auther_imge }}"
-                                                alt="Placeholder image">
-                                        </figure>
-                                    </div> --}}
-                                    <div class="media-content">
-                                        <p class="title is-4"> <a
-                                                href="{{ route('post.show', $post) }}">{{ $post->titel }}</a> </p>
-                                        <p class="subtitle is-6"> {{ $post->category }}</p>
-                                    </div>
-                                </div>
                                 <div class="content">
+                                    <p class="title is-4"> <a href="{{ route('post.show', $post) }}">{{ $post->titel }}</a>
+                                    </p>
                                     {{ $post->content }}
                                     <br>
-                                    <time datetime="2016-1-1">{{ $post['created_at'] }}</time>
+                                    <time datetime="2016-1-1">{{ $post->created_at }}</time>
                                     <br>
                                     @foreach ($post->tags as $tag)
-                                        <a href="{{ route('tags.show', $tag) }}" class="tag is-link">
+                                        <a href="{{ route('tag.show', $tag) }}" class="tag is-link">
                                             {{ $tag->name }}</a>
                                     @endforeach
-                                    <a href="{{ route('categories.show', $post->category) }}"
+                                    <a href="{{ route('category.show', $post->category) }}"
                                         class="tag is-danger">{{ $post->category->name }}</a>
                                 </div>
                             </div>
