@@ -18,13 +18,13 @@ class LoginController extends Controller
         $data = $request->validated();
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
-            return redirect()->back()->with('massage', 'welcome back');
+            return redirect()->route('welcome')->with('massage', 'welcome back');
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-    public function logOut(UserAuthRequestRequest $request)
+    public function logOut(Request $request)
     {
         Auth::logout();
 
@@ -32,6 +32,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('welcome');
     }
 }

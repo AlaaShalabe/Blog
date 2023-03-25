@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Features</a>
@@ -31,36 +31,26 @@
         </div>
         <div class="buttons">
             @guest
-                @if (Route::has('login'))
-                    <a class="button is-primary" href="{{ route('login') }}">
-                        <strong>{{ __('Login') }}</strong>
-                    </a>
-                @endif
-                @if (Route::has('rigester'))
-                    <a class="button is-primary" href="{{ route('signUp') }}">
-                        <strong>{{ __('signUp') }}</strong>
-                    </a>
-                @endif
-            @else
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logOut') }}"
-                            onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logOut') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
+                <a class="button is-primary" href="{{ route('login') }}">
+                    <strong>Login</strong>
+                </a>
+                <a class="button is-primary" href="{{ route('signUp') }}">
+                    <strong>SingUp</strong>
+                </a>
             @endguest
+            @auth
+                <div class="navbar-item"> {{ __('Hello') }} {{ Auth::User()->name }}!</div>
+                <form action="{{ route('logOut') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="button is-primary">
+                        Logout
+                    </button>
+                    {{-- <button type="submit" class="button is-denger">
+                    <a href="{{ route('mails') }}">E-mails</a>
+                  </button> --}}
+                </form>
+            @endauth
+
 
         </div>
     </div>
