@@ -32,7 +32,7 @@ class PostController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::lower(str_replace(' ', '-', $request->titel));
         $data['user_id'] = auth()->user()->id;
-        $data['image'] = $request->file('image')->store('public/post_images');
+        $data['image'] = $request->file('image')->store('public/post_images') ?? null;
         $post = Post::create($data);
         $post->tags()->attach($request->tags);
 
