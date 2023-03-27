@@ -28,6 +28,7 @@ class UpdatePostRequest extends FormRequest
             'category_id' => 'numeric|exists:categories,id',
             'tags' => 'exists:tags,id',
             'content' => 'string|min:20',
+            'bio' => 'string|min:10|max:255',
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ];
     }

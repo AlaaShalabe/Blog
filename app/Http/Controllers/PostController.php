@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Support\Str;
@@ -41,7 +42,8 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('post.show')->with(['post' => $post]);
+        $comments = Comment::all();
+        return view('post.show')->with(['post' => $post, 'comments' => $comments]);
     }
 
     public function edit(Post $post)

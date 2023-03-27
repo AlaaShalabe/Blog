@@ -13,8 +13,17 @@
                 <div class="field">
                     <label class="label">Title</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Name" name="titel">
+                        <input class="input" type="text" placeholder="Name" name="titel" value="{{ old('titel') }}">
                         @error('titel')
+                            <div class="help is-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">bio</label>
+                    <div class="control">
+                        <input class="input" placeholder="Name" name="bio" value="{{ old('bio') }}">
+                        @error('bio')
                             <div class="help is-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -63,8 +72,7 @@
 
                 <div class="mb-3">
                     <label class="form-label" for="inputImage">Image:</label>
-                    <input type="file" name="image" id="inputImage"
-                        class="form-control @error('image') is-invalid @enderror">
+                    <input type="file" name="image" id="inputImage" class="form-control">
                     @error('image')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror

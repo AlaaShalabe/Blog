@@ -2,36 +2,18 @@
 @section('content')
     <section class="section">
         <div class="block">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            <div class="clearfix">
+                <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    class="col-md-6 float-md-end mb-3 ms-md-3" alt="...">
+
+                <p
+                    style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:3.5em; text-align: center ;   height: 300px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;">
+                    <i> Welcome to the our Blog </i>
+                </p>
+
             </div>
         </div>
 
@@ -42,8 +24,9 @@
                 </div>
             @endif
         </div>
-        <div class="block">
-            This text is within a <strong>block</strong>.
+        <div class="block"
+            style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:2.5em">
+            Read our latest posts.
         </div>
         <div class="block">
             <div class="columns is-multiline">
@@ -52,16 +35,16 @@
                         <div class="card">
                             <div class="card-image">
                                 <figure class="image is-4by3">
-                                    <img src="{{ Storage::url($post->image) }}" alt="Placeholder image">
+                                    <img src="{{ Storage::url($post->image) }}" alt="{{ $post->titel }}">
                                 </figure>
                             </div>
                             <div class="card-content">
                                 <div class="content">
                                     <p class="title is-4"> <a href="{{ route('post.show', $post) }}">{{ $post->titel }}</a>
                                     </p>
-                                    {{ $post->content }}
+                                    {{ $post->bio }}
                                     <br>
-                                    <time datetime="2016-1-1">{{ $post->created_at->format('d-m-y') }}</time>
+                                    <time datetime="2016-1-1">{{ $post->created_at->format('d M y') }}</time>
                                     <br>
                                     @foreach ($post->tags as $tag)
                                         <a href="{{ route('tag.show', $tag) }}" class="tag is-link">

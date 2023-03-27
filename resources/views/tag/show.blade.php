@@ -17,7 +17,7 @@
                         <div class="card">
                             <div class="card-image">
                                 <figure class="image is-4by3">
-                                    <img src="{{ $post->image }} " alt="Placeholder image">
+                                    <img src="{{ Storage::url($post->image) }} " alt="Placeholder image">
                                 </figure>
                             </div>
                             <div class="card-content">
@@ -29,9 +29,9 @@
                                 </div>
 
                                 <div class="content">
-                                    {{ $post->content }}
+                                    {{ $post->bio }}
                                     <br>
-                                    <time datetime="2016-1-1">{{ $post->created_at->format('d-m-y') }}</time>
+                                    <time datetime="2016-1-1">{{ $post->created_at->format('d M y') }}</time>
                                     <br>
                                     @foreach ($post->tags as $tag)
                                         <a href="{{ route('tag.show', $tag) }}" class="tag is-link">

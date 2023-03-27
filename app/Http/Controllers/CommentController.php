@@ -11,12 +11,13 @@ class CommentController extends Controller
     public function store(Post $post, Request $request)
     {
         $request->validate([
-            'comment' => 'string|alpha',
+            'comment' => 'string|',
         ]);
         $post->comments()->create([
             'comment' => $request->comment,
             'user_id' => $request->user()->id,
         ]);
-        return route('post.show', $post);
+        return redirect()->back()->with(['post' => $post]);
     }
+    
 }

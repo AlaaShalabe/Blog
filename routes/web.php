@@ -58,6 +58,6 @@ Route::prefix('post')->middleware('auth')->group(function () {
     Route::delete('/delete/{post}', [PostController::class, 'destory'])->name('post.destory');
 });
 
-Route::prefix('comment')->group(function () {
-    Route::post('/store', [CommentController::class, 'store'])->name('comment.store');
+Route::prefix('comment')->middleware('auth')->group(function () {
+    Route::post('/store/{post}', [CommentController::class, 'store'])->name('comment.store');
 });

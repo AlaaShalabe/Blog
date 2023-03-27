@@ -15,43 +15,66 @@
             </ul>
         </div>
         <div class="block">
+            <div class="image">
+                <img src=" {{ Storage::url($post->image) }}" alt="{{ $post->titel }}">
+            </div>
+        </div>
+        <div class="block">
+
             <div class="titel">
                 {{ $post->titel }}
             </div>
         </div>
         <div class="block">
-            {{ $post->content }}
+            {{ $post->bio }}
         </div>
-        <div class="block">
-            {{ $post->image }}
+        <div class="content">
+            <div class="block">
+                {{ $post->content }}
+            </div>
         </div>
         <div class="block">
             {{ $post->category->name }}
         </div>
-        <a href="{{ route('post.edit', $post) }}">Edit</a>
-        <form action="{{ route('post.destory', $post) }}" method="POST">
-            @csrf
-            @method('delete')
-            <p class="control">
+        <div class="block">
+
+            <form action="{{ route('post.destory', $post) }}" method="POST">
+                @csrf
+                @method('delete')
+                <a href="{{ route('post.edit', $post) }}">Edit</a>
                 <button class="button is-danger is-outlined" type="submit">
                     <span class="icon is-small">
                         <i class="fas fa-times"></i>
                     </span>
                     <span>Delete post</span>
                 </button>
-        </form>
-        <form method="POST" action="{{ route('comment.store') }}">
-            @csrf
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Name of Comment</label>
-                <input type="text" name="name" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp">
-                @error('name')
-                    <div class="help is-danger">{{ $message }}</div>
-                @enderror
+            </form>
+        </div>
+        <div class="block">
+
+            <div class="card col-6;">
+                <div class="card-header">
+                    Comments :
+                </div>
+                @foreach ($post->comments as $comment)
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ $comment->comment }}</li>
+                    </ul>
+                @endforeach
+                <form method="POST" action="{{ route('comment.store', $post) }}">
+                    @csrf
+                    <div class="mb-3">
+                        <input type="text" name="comment" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                        @error('comment')
+                            <div class="help is-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary ">Comment</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary ">Create</button>
-        </form>
-        
+        </div>
+
+
     </section>
 @endsection
