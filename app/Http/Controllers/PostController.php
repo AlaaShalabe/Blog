@@ -31,7 +31,7 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $data = $request->validated();
-        $data['slug'] = Str::lower(str_replace(' ', '-', $request->titel));
+        $data['slug'] = Str::slug($request->title);
         $data['user_id'] = auth()->user()->id;
         $data['image'] = $request->file('image')->store('public/post_images') ?? null;
         $post = Post::create($data);
@@ -56,6 +56,7 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         $data = $request->validated();
+        $data['image'] = $request->file('image')->store('public/post_images') ?? null;
         $post->update($data);
         return redirect()->route('post.show', $post)->with('massage', 'Updated Successfully');
     }

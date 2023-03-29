@@ -16,7 +16,7 @@
 
             </div>
         </div>
-
+        <progress class="progress is-normal" value="100" max="100">40%</progress>
         <div class="block ">
             @if (Session::get('massage'))
                 <div class="alert alert-info mr-6 ml-6" role="alert">
@@ -28,6 +28,7 @@
             style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:2.5em">
             Read our latest posts.
         </div>
+        <progress class="progress is-normal" value="100" max="100">40%</progress>
         <div class="block">
             <div class="columns is-multiline">
                 @foreach ($posts as $post)
@@ -40,18 +41,23 @@
                             </div>
                             <div class="card-content">
                                 <div class="content">
-                                    <p class="title is-4"> <a href="{{ route('post.show', $post) }}">{{ $post->titel }}</a>
+                                    <p class="title is-4"> <a href="{{ route('post.show', $post) }}"><i>
+                                                {{ $post->titel }}</i></a>
                                     </p>
-                                    {{ $post->bio }}
+
+                                    <h4> {{ $post->bio }}</h4>
                                     <br>
-                                    <time datetime="2016-1-1">{{ $post->created_at->format('d M y') }}</time>
+                                    <time>
+                                        <h6> <a href="{{ route('category.show', $post->category) }}" class="has-text-dark">
+                                                {{ $post->category->name }}</a>|
+                                            {{ $post->created_at->format('d M y') }}</h6>
+                                    </time>
                                     <br>
                                     @foreach ($post->tags as $tag)
-                                        <a href="{{ route('tag.show', $tag) }}" class="tag is-link">
-                                            {{ $tag->name }}</a>
+                                        <a href="{{ route('tag.show', $tag) }}" class="has-text-info">
+                                            #{{$tag->name }} </a>
                                     @endforeach
-                                    <a href="{{ route('category.show', $post->category) }}"
-                                        class="tag is-danger">{{ $post->category->name }}</a>
+
                                 </div>
                             </div>
                         </div>

@@ -9,16 +9,15 @@
                 </div>
             @endif
         </div>
-        <div class="block ">
-            <div class="titel">
-                {{ $category->name }}'s Posts
-            </div>
+        <div class="clearfix">
+            <p
+                style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:3.5em; height: 100px;">
+                {{ $category->name }}'s Posts</p>
+            <p style="font-family:sans-serif ; font-size:2.5em; height: 100px;">
+                has {{ $category->posts->count() }} posts
+            </p>
         </div>
-        <div class="block ">
-            <div class="titel">
-                has {{ $category->posts->count() }} Posts
-            </div>
-        </div>
+        <progress class="progress is-normal" value="100" max="100"></progress>
         <div class="block ">
             <div class="columns is-multiline">
                 @foreach ($category->posts as $post)
@@ -30,18 +29,19 @@
                                 </figure>
                             </div>
                             <div class="card-content">
-                                <div class="media">
-                                    <div class="media-content">
-                                        <p class="title is-4"> <a
-                                                href="{{ route('post.show', $post) }}">"{{ $post->titel }}"</a>
-                                        </p>
-                                    </div>
-                                </div>
-
                                 <div class="content">
-                                    {{ $post->bio }}
+                                    <p class="title is-4"> <a href="{{ route('post.show', $post) }}"><i>
+                                                {{ $post->titel }}</i></a>
+                                    </p>
+
+                                    <h4> {{ $post->bio }}</h4>
                                     <br>
-                                    <time datetime="2016-1-1">{{ $post->created_at->format('d M y') }}</time>
+                                    <time>
+                                        <h6> <a href="{{ route('category.show', $post->category) }}" class="has-text-dark">
+                                                {{ $post->category->name }}</a>|
+                                            {{ $post->created_at->format('d M y') }}</h6>
+                                    </time>
+                                    <br>
                                 </div>
                             </div>
                         </div>

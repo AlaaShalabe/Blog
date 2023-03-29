@@ -5,12 +5,15 @@
 @section('content')
     <section class="section">
         <div class="container">
-            <div class="block ">
-                <li>{{ $tag->name }}</li>
+            <div class="clearfix">
+                <p
+                    style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:3.5em; height: 100px;">
+                    {{ $tag->name }}'s Posts</p>
+                <p style="font-family:sans-serif ; font-size:2.5em; height: 100px;">
+                    {{ $tag->posts->count() }} posts
+                </p>
             </div>
-            <div class="block ">
-                <li>{{ $tag->posts->count() }} posts</li>
-            </div>
+            <progress class="progress is-normal" value="100" max="100"></progress>
             <div class="columns is-multiline">
                 @foreach ($tag->posts as $post)
                     <div class="column is-4">
@@ -21,22 +24,22 @@
                                 </figure>
                             </div>
                             <div class="card-content">
-                                <div class="media">
-                                    <div class="media-content">
-                                        <p class="title is-4"> <a
-                                                href="{{ route('post.show', $post) }}">{{ $post->titel }}</a> </p>
-                                    </div>
-                                </div>
-
                                 <div class="content">
-                                    {{ $post->bio }}
+                                    <p class="title is-4"> <a href="{{ route('post.show', $post) }}"><i>
+                                                {{ $post->titel }}</i></a>
+                                    </p>
+
+                                    <h4> {{ $post->bio }}</h4>
                                     <br>
-                                    <time datetime="2016-1-1">{{ $post->created_at->format('d M y') }}</time>
+                                    <time>
+                                        <h6> {{ $post->created_at->format('d M y') }}</h6>
+                                    </time>
                                     <br>
                                     @foreach ($post->tags as $tag)
-                                        <a href="{{ route('tag.show', $tag) }}" class="tag is-link">
-                                            {{ $tag->name }}</a>
+                                        <a href="{{ route('tag.show', $tag) }}" class="has-text-info">
+                                            #{{ $tag->name }} </a>
                                     @endforeach
+
                                 </div>
                             </div>
                         </div>

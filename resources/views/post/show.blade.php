@@ -14,47 +14,48 @@
                 @endforeach
             </ul>
         </div>
-        <div class="block">
-            <div class="image">
-                <img src=" {{ Storage::url($post->image) }}" alt="{{ $post->titel }}">
-            </div>
-        </div>
-        <div class="block">
-
+        <div class="clearfix">
+            <img src=" {{ Storage::url($post->image) }}" alt="{{ $post->titel }}" class="col-md-6 float-md-end mb-3 ms-md-3">
             <div class="titel">
-                {{ $post->titel }}
+                <p
+                    style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:3.5em;   height: 200px;">
+                    {{ $post->titel }}
+                </p>
+                <p style="font-family:sans-serif ; font-size:1.5em;   height: 200px;">
+                    {{ $post->bio }}
+                </p>
+                <p style="font-family:sans-serif;font-size:1.5em">
+
+                    <b> {{ $post->category->name }} | {{ $post->created_at->format('d M y') }} </b>
+                </p>
             </div>
         </div>
-        <div class="block">
-            {{ $post->bio }}
-        </div>
-        <div class="content">
+        <progress class="progress is-normal" value="100" max="100"></progress>
+
+        <div class="clearfix">
+            <div class="col-md-9 float-md-end mb-3 ms-md-3">
+                <p style="font-family:sans-serif ; font-size:1.3em"> {{ $post->content }} </p>
+            </div>
             <div class="block">
-                {{ $post->content }}
+
+                <form action="{{ route('post.destory', $post) }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <a href="{{ route('post.edit', $post) }}" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-pen-to-square fa-xl"> </i>Edit</a>
+                    <button class="btn btn-danger btn-sm" type="submit">
+                        <span class="icon is-small">
+                            <i class="fas fa-times"></i>
+                        </span>
+                        <span>Delete</span>
+                    </button>
+                </form>
             </div>
         </div>
-        <div class="block">
-            {{ $post->category->name }}
-        </div>
-        <div class="block">
-
-            <form action="{{ route('post.destory', $post) }}" method="POST">
-                @csrf
-                @method('delete')
-                <a href="{{ route('post.edit', $post) }}">Edit</a>
-                <button class="button is-danger is-outlined" type="submit">
-                    <span class="icon is-small">
-                        <i class="fas fa-times"></i>
-                    </span>
-                    <span>Delete post</span>
-                </button>
-            </form>
-        </div>
-        <div class="block">
-
-            <div class="card col-6;">
+        <div class="clearfix">
+            <div class="col-md-9 float-md-end mb-3 ms-md-3">
                 <div class="card-header">
-                    Comments :
+                    {{ $post->comments->count() }} Comments :
                 </div>
                 @foreach ($post->comments as $comment)
                     <ul class="list-group list-group-flush">

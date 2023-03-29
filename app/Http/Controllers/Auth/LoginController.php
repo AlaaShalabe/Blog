@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAuthRequestRequest;
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +13,9 @@ class LoginController extends Controller
 {
     public function login()
     {
-        return view('auth.login');
+        $categories = Category::all();
+        $posts = Post::all();
+        return view('auth.login', ['categories' => $categories, 'posts' => $posts]);
     }
     public function storeLogin(UserAuthRequestRequest $request)
     {

@@ -15,7 +15,7 @@
             </ul>
         </div>
         <div class="block">
-            <form method="POST" action="{{ route('tag.store') }}">
+            <form class="col-md-6 offset-md-3" method="POST" action="{{ route('tag.store') }}">
                 @csrf
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Name of Tag</label>
@@ -24,7 +24,14 @@
                         <div class="help is-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary ">Create</button>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">{{ __('Create') }}</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-light">{{ __('Cancel') }}</button>
+                    </div>
+                </div>
             </form>
         </div>
     </section>

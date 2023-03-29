@@ -10,12 +10,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">post</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">category</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,6 +21,30 @@
                         <li><a class="dropdown-item" href="{{ route('tag.create') }}">tag</a></li>
                     </ul>
                 </li>
+                {{-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Tags
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        @foreach ($post->tags as $tag)
+                            <li><a class="dropdown-item" href="{{ route('tag.show', $tag) }}">
+                                    #{{ $tag->name }} </a></li>
+                        @endforeach
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li> <a href="{{ route('category.show', $post->category) }}"
+                                class="tag is-danger">{{ $post->category->name }}</a>
+                        </li>
+
+                    </ul>
+                </li> --}}
             </ul>
         </div>
         <div class="buttons">

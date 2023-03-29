@@ -2,7 +2,7 @@
 @section('content')
     <section class="section">
         <div class="block">
-            <h1 class="title">Edit the {{ $category->name }} task</h1>
+            <h1 class="col-md-6 offset-md-3">Edit the <i><u>{{ $category->name }}</u></i> </h1>
         </div>
         <div class="block">
             <ul>
@@ -11,7 +11,7 @@
             </ul>
         </div>
         <div class="block">
-            <form method="POST" action="{{ route('category.update', $category) }}">
+            <form class="col-md-6 offset-md-3" method="POST" action="{{ route('category.update', $category) }}">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -21,7 +21,14 @@
                         <div class="help is-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary ">Create</button>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">{{ __('Edit') }}</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-light">{{ __('Cancel') }}</button>
+                    </div>
+                </div>
             </form>
         </div>
     </section>

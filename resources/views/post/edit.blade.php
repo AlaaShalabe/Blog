@@ -6,9 +6,13 @@
                 @foreach ($errors->all() as $error)
                 @endforeach
             </ul>
+            <i class="col-md-6 offset-md-3">
+                <strong> update <i><u>{{ $post->titel }}</u></i> </strong>
+            </i>
         </div>
         <div class="block">
-            <form method="POST" action="{{ route('post.update', $post) }}" enctype="multipart/form-data">
+            <form class="col-md-6 offset-md-3" method="POST" action="{{ route('post.update', $post) }}"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="field">
@@ -65,23 +69,22 @@
 
                 <div class="mb-3">
                     <label class="form-label" for="inputImage">Image:</label>
-                    <input type="file" name="image" id="inputImage"
-                        class="form-control @error('image') is-invalid @enderror" {{ old('image', $post->image) }}>
+                    <input type="file" name="image" id="inputImage" class="form-control "
+                        value=" {{ old('image', $post->image) }}">
                     @error('image')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-        </div>
 
-        <div class="field is-grouped">
-            <div class="control">
-                <button class="button is-link">Edit</button>
-            </div>
-            <div class="control">
-                <button class="button is-link is-light">Cancel</button>
-            </div>
-        </div>
-        </form>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">{{ __('Edit') }}</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-light">{{ __('Cancel') }}</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
 @endsection
