@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Http\Resources\PostResource;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
@@ -14,11 +15,11 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    public function index()
+    public function index(Post $post)
     {
         $categories = Category::all();
         $posts = Post::all();
-        return view('welcome')->with(['categories' => $categories, 'posts' => $posts]);
+        return view('welcome', compact('categories', 'posts'));
     }
 
     public function create()

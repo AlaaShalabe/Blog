@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
  */
-class TatFactory extends Factory
+class TagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class TatFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->sentence(10);
+        $name = $this->faker->name();
         return [
             'name' => $name,
             'slug' => Str::slug($name),

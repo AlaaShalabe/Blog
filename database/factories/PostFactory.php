@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -18,14 +19,15 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $titel = $this->faker->text(55);
+        $titel = $this->faker->sentence();
         return [
-            'title' => $titel,
-            'content' => fake()->paragraph(10),
-            'bio' => fake()->text(255),
-            'image' => fake()->image(),
+            'titel' => $titel,
+            'content' => fake()->text(1000),
+            'bio' => fake()->realText(50),
+            'image' => fake()->imageUrl(),
             'slug' => Str::slug($titel),
-            'category_id' => Category::factory(),
+            'category_id' => $this->faker->randomElement(Category::pluck('id')),
+            'user_id' => rand(1, 3),
         ];
     }
 }

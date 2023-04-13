@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('bio')->nullable();
             $table->longText('content')->nullable();
             $table->string('image')->nullable();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('slug')->unique();
             $table->timestamps();
         });

@@ -1,6 +1,13 @@
 @extends('partials.app')
 @section('content')
     <section class="section">
+        <div class="block ">
+            @if (Session::get('massage'))
+                <div class="alert alert-info mr-6 ml-6" role="alert">
+                    <li>{{ Session::get('massage') }}</li>
+                </div>
+            @endif
+        </div>
         <div class="block">
             <div class="clearfix">
                 <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -17,13 +24,7 @@
             </div>
         </div>
         <progress class="progress is-normal" value="100" max="100">40%</progress>
-        <div class="block ">
-            @if (Session::get('massage'))
-                <div class="alert alert-info mr-6 ml-6" role="alert">
-                    <li>{{ Session::get('massage') }}</li>
-                </div>
-            @endif
-        </div>
+
         <div class="block"
             style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:2.5em">
             Read our latest posts.
