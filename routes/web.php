@@ -4,8 +4,12 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RigesterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LangController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PostController::class, 'index'])->name('welcome');
+Route::get('contact', [ContactController::class, 'create'])->name('contact');
+Route::post('contact/create', [ContactController::class, 'store'])->name('contact.store');
 Route::prefix('category')->middleware('auth')->group(function () {
     Route::get('/index', [CategoryController::class, 'index'])->name('categories');
     Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
@@ -32,6 +38,7 @@ Route::prefix('category')->middleware('auth')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
+    Route::get('users', [UserController::class, 'index'])->name('users');
     Route::get('/signUp', [RigesterController::class, 'signUp'])->name('signUp');
     Route::post('/rigester', [RigesterController::class, 'rigester'])->name('rigester');
     Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
@@ -60,4 +67,17 @@ Route::prefix('post')->middleware('auth')->group(function () {
 
 Route::prefix('comment')->middleware('auth')->group(function () {
     Route::post('/store/{post}', [CommentController::class, 'store'])->name('comment.store');
+    Route::delete('/delete/{comment}', [CommentController::class, 'destory'])->name('comment.destory');
+});
+Route::get('/lang/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'ar'])) {
+        abort(400);
+    }
+    session()->put(['locale' => $locale]);
+
+    App::setLocale($locale);
+    //   app()->setLocale($locale); 
+    return redirect('/');
+    // return 0;
+    //  App::setLocale($locale);
 });
