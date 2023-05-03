@@ -37,29 +37,47 @@
                 <p style="font-family:sans-serif ; font-size:1.3em"> {{ $post->content }} </p>
             </div>
             <div class="block">
-
+                {{-- @if (Auth::user()) --}}
                 <form action="{{ route('post.destory', $post) }}" method="POST">
                     @csrf
                     @method('delete')
                     <a href="{{ route('post.edit', $post) }}" class="btn btn-primary btn-sm">
-                        <i class="fa-solid fa-pen-to-square fa-xl"> </i>Edit</a>
+                        <i class="fa-solid fa-pen-to-square fa-xl"> </i>{{ __('Edit') }}</a>
                     <button class="btn btn-danger btn-sm" type="submit">
                         <span class="icon is-small">
                             <i class="fas fa-times"></i>
                         </span>
-                        <span>Delete</span>
+                        <span>{{ __('Delete') }}</span>
                     </button>
                 </form>
+                {{-- @endif --}}
             </div>
         </div>
         <div class="clearfix">
             <div class="col-md-9 float-md-end mb-3 ms-md-3">
                 <div class="card-header">
-                    {{ $post->comments->count() }} Comments :
+                    {{ $post->comments->count() }} {{ __('Comments') }} :
                 </div>
                 @foreach ($post->comments as $comment)
+                    <strong>{{ $comment->user->name }}</strong>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{ $comment->comment }}</li>
+                        <li class="list-group-item">
+                            {{ $comment->comment }}
+
+                            <form action="{{ route('comment.destory', $comment) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                {{-- <a href="{{ route('post.edit', $post) }}" class="btn btn-primary btn-sm">
+                                <i class="fa-solid fa-pen-to-square fa-xl"> </i>Edit</a> --}}
+                                <button class="btn btn-danger btn-sm" type="submit">
+                                    <span class="icon is-small">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    <span>{{ __('Delete') }}</span>
+                                </button>
+
+                            </form>
+                        </li>
                     </ul>
                 @endforeach
                 <form method="POST" action="{{ route('comment.store', $post) }}">
@@ -71,7 +89,8 @@
                             <div class="help is-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary ">Comment</button>
+
+                    <button type="submit" class="btn btn-primary ">{{ __('Comment') }}</button>
                 </form>
             </div>
         </div>

@@ -11,7 +11,7 @@
             <form class="col-md-6 offset-md-3" method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="field">
-                    <label class="label">Title</label>
+                    <label class="label">{{ __('Title') }}</label>
                     <div class="control">
                         <input class="input" type="text" placeholder="Name" name="titel" value="{{ old('titel') }}">
                         @error('titel')
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">bio</label>
+                    <label class="label">{{ __('bio') }}</label>
                     <div class="control">
                         <input class="input" placeholder="Name" name="bio" value="{{ old('bio') }}">
                         @error('bio')
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Content</label>
+                    <label class="label">{{ __('Content') }}</label>
                     <div class="control">
                         <textarea class="textarea" placeholder="Name" name="content">{{ old('content') }}</textarea>
                         @error('content')
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Category</label>
+                    <label class="label">{{ __('Category') }}</label>
                     <div class="control">
                         <div class="select">
                             <select name="category_id">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Tag</label>
+                    <label class="label">{{ __('Tag') }}</label>
                     <div class="control">
                         <select name="tags[]" class="form-select" size="3" aria-label="size 3 select example">
                             @foreach ($tags as $tag)
@@ -71,7 +71,7 @@
 
 
                 <div class="mb-3">
-                    <label class="label" for="inputImage">Image:</label>
+                    <label class="label" for="inputImage">{{ __('Image') }}:</label>
                     <input type="file" name="image" id="inputImage" class="form-control">
                     @error('image')
                         <span class="text-danger">{{ $message }}</span>

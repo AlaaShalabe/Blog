@@ -6,45 +6,39 @@
                 @foreach ($errors->all() as $error)
                 @endforeach
             </ul>
-            <i class="col-md-6 offset-md-3">
-                <strong> {{ __('update') }} <i><u>{{ $post->titel }}</u></i> </strong>
-            </i>
         </div>
         <div class="block">
-            <form class="col-md-6 offset-md-3" method="POST" action="{{ route('post.update', $post) }}"
-                enctype="multipart/form-data">
+            <form class="col-md-6 offset-md-3" method="POST" action="{{ route('contact.store') }}" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
                 <div class="field">
-                    <label class="label">{{ __('Title') }}</label>
+                    <label class="label">Name</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Name" name="titel"
-                            value="{{ old('titel', $post->titel) }}">
+                        <input class="input" type="text" placeholder="Name" name="titel" value="{{ old('titel') }}">
                         @error('titel')
                             <div class="help is-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">{{ __('bio') }}</label>
+                    <label class="label"></label>
                     <div class="control">
-                        <input class="input" placeholder="Name" name="bio" value="{{ old('bio', $post->bio) }}">
+                        <input class="input" placeholder="Name" name="bio" value="{{ old('bio') }}">
                         @error('bio')
                             <div class="help is-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">{{ __('Content') }}</label>
+                    <label class="label">Content</label>
                     <div class="control">
-                        <textarea class="textarea" placeholder="Name" name="content">{{ old('content', $post->content) }}</textarea>
+                        <textarea class="textarea" placeholder="Name" name="content">{{ old('content') }}</textarea>
                         @error('content')
                             <div class="help is-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
-                <div class="field">
-                    <label class="label">{{ __('Category') }}</label>
+                {{-- <div class="field">
+                    <label class="label">Category</label>
                     <div class="control">
                         <div class="select">
                             <select name="category_id">
@@ -60,11 +54,11 @@
                             @enderror
                         </div>
                     </div>
-                </div>
-                <div class="field">
-                    <label class="label">{{ __('Tag') }}</label>
+                </div> --}}
+                {{-- <div class="field">
+                    <label class="label">Tag</label>
                     <div class="control">
-                        <select name="tags[]" multiple class="select is-multiple">
+                        <select name="tags[]" class="form-select" size="3" aria-label="size 3 select example">
                             @foreach ($tags as $tag)
                                 <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                             @endforeach
@@ -73,21 +67,19 @@
                             <div class="help is-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
 
 
                 <div class="mb-3">
-                    <label class="form-label" for="inputImage">{{ __('Image') }}:</label>
-                    <input type="file" name="image" id="inputImage" class="form-control "
-                        value=" {{ old('image', $post->image) }}">
+                    <label class="label" for="inputImage">Image:</label>
+                    <input type="file" name="image" id="inputImage" class="form-control">
                     @error('image')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-
                 <div class="field is-grouped">
                     <div class="control">
-                        <button class="button is-link">{{ __('Edit') }}</button>
+                        <button class="button is-link">{{ __('Create') }}</button>
                     </div>
                     <div class="control">
                         <button class="button is-link is-light">{{ __('Cancel') }}</button>

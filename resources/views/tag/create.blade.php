@@ -18,7 +18,7 @@
             <form class="col-md-6 offset-md-3" method="POST" action="{{ route('tag.store') }}">
                 @csrf
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Name of Tag</label>
+                    <label for="exampleInputEmail1" class="form-label">{{ __('Name') }}</label>
                     <input type="text" name="name" class="input">
                     @error('name')
                         <div class="help is-danger">{{ $message }}</div>

@@ -9,37 +9,37 @@
             @endif
         </div>
         <div class="mr-6 ml-6">
-            @if (Auth::user()->role == 'admin')
-                <a href="{{ route('tag.create') }}">{{ __('New Tag') }}</a>
-            @endif
+            {{-- <a href="{{ route('category.create') }}"> New Category</a> --}}
             <div class="table-container">
                 <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+
                     <thead>
                         <tr>
-                            <th>{{ __('Tags') }}</th>
+                            <th>{{ __('Users') }}</th>
                             <th>{{ __('Time to create') }}</th>
-                            <th>{{ array_sort_recursive($array);'Actions' }}</th>
+                            <th>{{ __('Role') }}</th>
                         </tr>
                     </thead>
-                    @foreach ($tags as $tag)
+                    @foreach ($users as $user)
                         <tbody>
                             <tr>
-                                <td>{{ $tag->name }}</td>
-                                <td>{{ $tag->created_at->format('d M y') }}</td>
-                                <td>
-                                    <form action="{{ route('tag.destory', $tag) }}" method="POST">
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->created_at->format('d M y') }}</td>
+                                <td>{{ $user->role }}</td>
+                                {{-- <td>
+
+                                    <form action="{{ route('user.destory', $user) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        @if (Auth::user()->role == 'admin')
-                                            <a href="{{ route('tag.edit', $tag) }}">
-                                                <i class="fa-solid fa-pen-to-square fa-xl"></i></a>
-                                            <button class="delete " type="submit">
-                                            </button>
-                                        @endif
-                                        <a href="{{ route('tag.show', $tag) }}"><i
+                                        <a href="{{ route('user.edit', $user) }}">
+                                            <i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+                                        <a href="{{ route('user.show', $user) }}"><i
                                                 class="fa-sharp fa-solid fa-eye fa-xl"></i></a>
+                                        <button class="delete " type="submit">
+                                        </button>
                                     </form>
-                                </td>
+
+                                </td> --}}
                             </tr>
                         </tbody>
                     @endforeach

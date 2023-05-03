@@ -2,7 +2,7 @@
 @section('content')
     <section class="section">
         <div class="block">
-            <h1 class="col-md-6 offset-md-3">Edit the <i><u>{{ $category->name }}</u></i> </h1>
+            <h1 class="col-md-6 offset-md-3">{{ __('Edit') }} <i><u>{{ $category->name }}</u></i> </h1>
         </div>
         <div class="block">
             <ul>
@@ -15,7 +15,7 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Name of Category</label>
+                    <label for="exampleInputEmail1" class="form-label">{{ __('Name') }}</label>
                     <input type="text" name="name" value="{{ old('name', $category->name) }}" class="form-control">
                     @error('name')
                         <div class="help is-danger">{{ $message }}</div>

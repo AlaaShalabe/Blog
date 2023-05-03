@@ -8,33 +8,35 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">{{ __('Home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('categories') }}">Categoreis</a>
+                    <a class="nav-link active" aria-current="page"
+                        href="{{ route('categories') }}">{{ __('Categoreis') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('tags') }}">Tags</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('tags') }}">{{ __('Tags') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('contact') }}">Contact Us</a>
+                    <a class="nav-link active" aria-current="page"
+                        href="{{ route('contact') }}">{{ __('Contact Us') }}</a>
                 </li>
             </ul>
             <div class="dropdown">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    Language
+                    {{ __('Language') }}
                 </a>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/lang/en">English</a>
+                        <a class="nav-link active" aria-current="page" href="/lang/en">{{ __('English') }}</a>
                     </li>
 
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/lang/ar">Arabic</a>
+                        <a class="nav-link active" aria-current="page" href="/lang/ar">{{ __('Arabic') }}</a>
                     </li>
                 </ul>
             </div>
@@ -44,10 +46,10 @@
         <div class="buttons">
             @guest
                 <a class="button is-link" href="{{ route('login') }}">
-                    <strong>Login</strong>
+                    <strong>{{ __('Log in') }}</strong>
                 </a>
                 <a class="button is-link" href="{{ route('signUp') }}">
-                    <strong>SingUp</strong>
+                    <strong>{{ __('Sing up') }}</strong>
                 </a>
             @endguest
             @auth
@@ -55,7 +57,7 @@
                 <form action="{{ route('logOut') }}" method="POST">
                     @csrf
                     <button type="submit" class="button is-link">
-                        Logout
+                        {{ __('Log out') }}
                     </button>
                     {{-- <button type="submit" class="button is-denger">
                     <a href="{{ route('mails') }}">E-mails</a>

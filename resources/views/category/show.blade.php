@@ -14,7 +14,7 @@
                 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:3.5em; height: 100px;">
                 {{ $category->name }}'s Posts</p>
             <p style="font-family:sans-serif ; font-size:2.5em; height: 100px;">
-                has {{ $category->posts->count() }} posts
+                {{ __('has') }} {{ $category->posts->count() }} {{ __('posts') }}
             </p>
         </div>
         <progress class="progress is-normal" value="100" max="100"></progress>
