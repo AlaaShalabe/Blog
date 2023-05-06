@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\RigesterUser;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Http\Resources\PostResource;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+
 
 class PostController extends Controller
 {
@@ -18,7 +18,7 @@ class PostController extends Controller
     public function index(Post $post)
     {
         $categories = Category::all();
-        $posts = Post::all();
+        $posts = Post::paginate(6);
         return view('welcome', compact('categories', 'posts'));
     }
 
@@ -32,7 +32,7 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $data = $request->validated();
-        $data['slug'] = Str::slug($request->title);
+        $data['slug'] = Str::slug($request->titel);
         $data['user_id'] = auth()->user()->id;
         $data['image'] = $request->file('image')->store('public/post_images') ?? null;
         $post = Post::create($data);
@@ -44,11 +44,12 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $comments = Comment::all();
-        return view('post.show')->with(['post' => $post, 'comments' => $comments]);
+        return view('post.show', ['post' => $post, 'comments' => $comments]);
     }
 
     public function edit(Post $post)
     {
+        // $this->authorize('update', $post);
         $categories = Category::all();
         $tags = Tag::all();
         return View('post.edit')->with(['post' => $post, 'categories' => $categories, 'tags' => $tags]);
@@ -56,6 +57,7 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post)
     {
+        //   $this->authorize('update', $post);
         $data = $request->validated();
         $data['image'] = $request->file('image')->store('public/post_images') ?? null;
         $post->update($data);
@@ -64,6 +66,7 @@ class PostController extends Controller
 
     public function destory(Post $post)
     {
+        $this->authorize('delete', $post);
         $post->delete();
         return redirect()->route('welcome')->with('massage', 'Deleted Successfully');
     }
