@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\RigesterUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAuthRegisterRequest;
+use App\Mail\WelcomeMail;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class RigesterController extends Controller
 {
@@ -18,14 +22,19 @@ class RigesterController extends Controller
     }
     public function rigester(UserAuthRegisterRequest $request)
     {
+        //dd('hi');
         $categories = Category::all();
         $posts = Post::all();
         $request->validated();
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+
+        event(new RigesterUser($user));
+        Auth::login($user);
+       
         return view('welcome', ['categories' => $categories, 'posts' => $posts])->with('massage', 'Welcome in our blog');
     }
 }
