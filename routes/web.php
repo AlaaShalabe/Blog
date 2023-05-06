@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LangController;
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -69,15 +70,10 @@ Route::prefix('comment')->middleware('auth')->group(function () {
     Route::post('/store/{post}', [CommentController::class, 'store'])->name('comment.store');
     Route::delete('/delete/{comment}', [CommentController::class, 'destory'])->name('comment.destory');
 });
-Route::get('/lang/{locale}', function ($locale) {
-    if (!in_array($locale, ['en', 'ar'])) {
-        abort(400);
-    }
-    session()->put(['locale' => $locale]);
+Route::get('/lang/{local}', [LocalizationController::class, 'langChainge']);
 
-    App::setLocale($locale);
-    //   app()->setLocale($locale); 
-    return redirect('/');
-    // return 0;
-    //  App::setLocale($locale);
+
+
+Route::get('/lang/{id}', function($id){
+    return view('post.show',['id'=>$id]);
 });

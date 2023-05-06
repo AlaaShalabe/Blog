@@ -23,10 +23,9 @@ class TagController extends Controller
     public function store(StoreTagRequeste $request)
     {
         $request->validated();
-        Tag::create([
-            'name' => $request->name,
-            'slug' => $request->slug = Str::lower(str_replace(' ', ' -', $request->name))
-        ]);
+        $data['name'] = $request->name;
+        $data['slug'] = Str::slug($request->name);
+        Tag::create($data);
         return redirect()->route('tags')->with('massage', 'Created Successfully');
     }
 

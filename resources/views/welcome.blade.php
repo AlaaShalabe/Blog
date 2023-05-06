@@ -70,6 +70,6 @@
                 </div>
             </div>
         </div>
-        {{ $posts->links() }}
+        {{-- {{ $posts->links() }} --}}
     </section>
 @endsection
