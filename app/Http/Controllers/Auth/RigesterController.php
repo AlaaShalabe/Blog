@@ -9,6 +9,7 @@ use App\Mail\WelcomeMail;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\MessageSent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -33,8 +34,10 @@ class RigesterController extends Controller
         ]);
 
         event(new RigesterUser($user));
+        $admin = User::first();
+        $admin->notify(new MessageSent());
         Auth::login($user);
-       
+
         return view('welcome', ['categories' => $categories, 'posts' => $posts])->with('massage', 'Welcome in our blog');
     }
 }
