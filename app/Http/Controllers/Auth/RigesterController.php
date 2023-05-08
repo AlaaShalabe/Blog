@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Events\RigesterUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAuthRegisterRequest;
+use App\Jobs\SendEmail;
 use App\Mail\WelcomeMail;
 use App\Models\Category;
 use App\Models\Post;
@@ -34,8 +35,7 @@ class RigesterController extends Controller
         ]);
 
         event(new RigesterUser($user));
-        $admin = User::first();
-        $admin->notify(new MessageSent());
+        dispatch(new SendEmail());
         Auth::login($user);
 
         return view('welcome', ['categories' => $categories, 'posts' => $posts])->with('massage', 'Welcome in our blog');

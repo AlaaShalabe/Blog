@@ -2,12 +2,16 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
+use App\Notifications\MessageSent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+
 
 class SendEmail implements ShouldQueue
 {
@@ -30,6 +34,8 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        //
+        $admin = User::first();
+        $notification = new MessageSent();
+        Notification::send($admin, $notification);
     }
 }
