@@ -3,6 +3,10 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use App\Models\Post;
+use App\Models\Tag;
+use illuminate\Create;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase

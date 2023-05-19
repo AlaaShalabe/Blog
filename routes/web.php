@@ -44,7 +44,7 @@ Route::prefix('user')->group(function () {
     Route::post('/rigester', [RigesterController::class, 'rigester'])->name('rigester');
     Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
     Route::post('/storeLogin', [LoginController::class, 'storeLogin'])->name('storeLogin')->middleware('guest');
-    Route::post('/logOut', [LoginController::class, 'logOut'])->name('logOut');
+    Route::post('/logOut', [LoginController::class, 'logOut'])->name('logOut')->middleware('auth');
 });
 
 Route::prefix('tag')->middleware('auth')->group(function () {
@@ -74,6 +74,6 @@ Route::get('/lang/{local}', [LocalizationController::class, 'langChainge']);
 
 
 
-Route::get('/lang/{id}', function($id){
-    return view('post.show',['id'=>$id]);
+Route::get('/lang/{id}', function ($id) {
+    return view('post.show', ['id' => $id]);
 });

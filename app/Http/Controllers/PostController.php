@@ -42,6 +42,7 @@ class PostController extends Controller
     }
 
     public function show(Post $post)
+
     {
         $comments = Comment::all();
         return view('post.show', ['post' => $post, 'comments' => $comments]);
